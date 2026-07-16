@@ -1,1 +1,0 @@
-console.log("truth is i didn't know how to set an app with an empty pathway, so now you've found my empty page")
