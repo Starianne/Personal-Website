@@ -54,7 +54,7 @@
     text-shadow: 0 4px 5px gray;
 }
 
-html {
+#home {
     background-color: #d9d9d9;
     background: linear-gradient(180deg,rgba(255, 255, 255, 1) 70%, #d9d9d9 100%);
     color: black;
