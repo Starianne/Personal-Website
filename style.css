@@ -1,21 +1,65 @@
+@font-face {
+    font-family: "FinalFantasy";
+    src: url(./fonts/Ferrum.otf) format("opentype");
+}
+
+@font-face {
+    font-family: "Menu";
+    src: url(./fonts/NewRodin.otf) format("opentype");
+}
+
+*{
+    font-family: "Menu";
+}
+
+#title {
+    font-family: "FinalFantasy";
+    font-weight: 200;
+    font-size: 200px;
+    text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+    color: black;
+    z-index: 1;
+}
+
+
+#titleImg {
+    z-index: 0;
+    position: absolute;
+}
+
+#titleOuter {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+#menuScreen {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+}
+
+#menuScreen p{
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#menuScreen p:hover {
+    font-size: larger;
+    text-shadow: 0 0 20px gray;
+}
+
 body {
-    background-color: rgb(116, 200, 255);
+    background-color: rgb(255, 255, 255);
     color: black;
 }
 
 h1 {
-    color: rgb(36, 65, 85);
+    color: rgb(0, 0, 0);
 }
 
 img {
     max-height: 500px;
 }
 
-div {
-    background-color: rgb(163, 218, 255);
-    border: solid 3px rgb(36, 65, 85);
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    display: grid;
-}
