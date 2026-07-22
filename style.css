@@ -97,8 +97,8 @@ video {
 .aboutOverlay {
     height: 15vh;
     width: 100vw;
-    background-color: rgba(197, 205, 205, 1);
-    background: linear-gradient(0deg,rgba(176, 176, 176, 0.74) 68%, rgba(173, 194, 255, 0.74) 100%);
+    background-color: rgb(221, 223, 223);
+    background: linear-gradient(0deg,rgba(214, 214, 214, 0.74) 68%, rgba(173, 194, 255, 0.74) 100%);
     display: flex;
     position: absolute;
     z-index: 2147483647;
@@ -108,6 +108,14 @@ video {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+#topOverlay div {
+    font-size: 40px;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    color: #f3f0f0;
+    margin-top: 4vh;
+    margin-left: 5vw;
 }
 
 #bottomOverlay {
@@ -120,9 +128,36 @@ video {
 .goHome {
     font-size: 40px;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-    color: #b1b1b1;
+    color: #f3f0f0;
     position: absolute;
     right: 0;
     margin-right: 5vw;
     margin-top: 2vh;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.goHome:hover {
+    font-size: 45px;
+}
+
+#basicStats {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    margin-top: 20vh;
+    margin-left: 10vw;
+}
+
+#basicStats h1{
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    color: #f3f0f0;
+    font-size: 35px;
+    margin-bottom: -3vh;
+}
+
+#status {
+    margin-top: 2vh;
+    text-decoration: underline;
 }

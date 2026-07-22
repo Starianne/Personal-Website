@@ -11,14 +11,19 @@
         <video autoplay muted disablePictureInPicture>
             <source src="./video.mp4" type="video/mp4">
         </video>
-            <div class="aboutOverlay" id="topOverlay"> Hello </div>
+            <div class="aboutOverlay" id="topOverlay"><div> About me </div></div>
             <div> <!--These three divs will go over the video/picture acc the video/picture is gonna have to be the background-->
-                <div></div>
+                <div id="basicStats">
+                    <h1 id="status">status</h1>
+                    <h1>Annelies</h1>
+                    <h1>17</h1>
+                    <h1></h1>
+                </div>
                 <div></div>
                 <div></div>
             </div>
             <div class="aboutOverlay" id="bottomOverlay">
-                <div class="goHome">Go home</div>
+                <div class="goHome" onclick="window.location.href='./index.html'">Go home</div>
             </div>
     </body>
 </html>
