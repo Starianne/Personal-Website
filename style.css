@@ -17,6 +17,7 @@
     font-weight: 200;
     font-size: 200px;
     text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+    -webkit-user-select: none;
     user-select: none;
     color: black;
     z-index: 1;
@@ -26,6 +27,7 @@
 #titleImg {
     z-index: 0;
     position: absolute;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -40,6 +42,7 @@
     justify-content: center;
     align-items: center;
     display: grid;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -77,3 +80,49 @@ img {
     max-height: 500px;
 }
 
+video {
+    height: 100vh
+}
+
+#aboutMeBack {
+    background-color: rgb(182, 184, 180);
+    overflow: hidden;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    z-index: 0;
+    position: relative;
+}
+
+.aboutOverlay {
+    height: 15vh;
+    width: 100vw;
+    background-color: rgba(197, 205, 205, 1);
+    background: linear-gradient(0deg,rgba(176, 176, 176, 0.74) 68%, rgba(173, 194, 255, 0.74) 100%);
+    display: flex;
+    position: absolute;
+    z-index: 2147483647;
+}
+
+#topOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#bottomOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 15vh;
+}
+
+.goHome {
+    font-size: 40px;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    color: #b1b1b1;
+    position: absolute;
+    right: 0;
+    margin-right: 5vw;
+    margin-top: 2vh;
+}
