@@ -8,6 +8,27 @@
     src: url(./fonts/NewRodin.otf) format("opentype");
 }
 
+@font-face {
+    font-family: "CBold";
+    src: url(./fonts/ChangelingNeoBold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "CInline";
+    src: url(./fonts/ChangelingNeoInline.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "CLight";
+    src: url(./fonts/ChangelingNeoLight.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "CStencil";
+    src: url(./fonts/ChangelingNeoStencilBold.ttf) format("truetype");
+}
+
+
 *{
     font-family: "Menu";
 }
@@ -147,17 +168,44 @@ video {
     top: 0;
     left: 0;
     margin-top: 20vh;
-    margin-left: 10vw;
+    margin-left: 2vw;
+    max-width: 35vw;
 }
 
 #basicStats h1{
-    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-    color: #f3f0f0;
-    font-size: 35px;
-    margin-bottom: -3vh;
+    font-family: "CBold";
+    font-weight: 100;
+    color: #303030;
+    font-size: 20px;
+    margin-bottom: -1vh;
 }
 
 #status {
     margin-top: 2vh;
-    text-decoration: underline;
+}
+
+#status div {
+    color: #fff;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 0 5px 5px 0;
+    margin-top: 1vh;
+    font-size: 5px;
+    margin-left: -2vw;
+}
+
+.info p {
+    font-weight: 100;
+    font-size: 20px;
+    color: #303030;
+}
+
+#skills {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    margin-top: 20vh;
+    margin-right: 2vw;
+    max-width: 35vw;
 }
