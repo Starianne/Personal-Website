@@ -1,10 +1,16 @@
-const aboutMe = document.getElementById('aboutMe')
-const projects = document.getElementById('projects')
-const todo = document.getElementById('todo')
-const blog = document.getElementById('blog')
-var menuItems = [aboutMe, projects, todo, blog]
-
-//Ok wait maybe Ill use it later
-
 //build audio player here (just toggle on an off for music) and add sound effects to page selection
 
+const Music = document.querySelector('.music');
+const audio = document.querySelector('#audio')
+
+Music.addEventListener("click", () => {
+    const playing = Music.classList.contains("play")
+    if (playing) {
+        Music.classList.remove("play")
+        audio.pause()
+
+    } else {
+        Music.classList.add("play")
+        audio.play()
+    }
+})

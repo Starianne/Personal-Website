@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>home</title>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="home.js"></script>
+        <script src="home.js" defer></script>
         <link rel="icon" type="image/x-icon" href="./imgs/TROP000.PNG">
     </head>
     <body>
@@ -22,9 +22,11 @@
             <p onclick="window.location.href='./stillBuilding.html'">blog</p>
         </div>
         <div class="music"> <!-- We will ahve to make our own audio player-->
-            <audio controls loop controlslist="nofullscreen nodownload noplaybackrate noremoteplayback foobar">
-                <source src="./thePromise.mp3">
-            </audio>
+            <audio id="audio" src="./thePromise.mp3"></audio>
+            <div id="musicImg">
+                <img src="./imgs/TROP023.PNG" alt="crystalHeart">
+            </div>
+
         </div>
     </body>
 </html>

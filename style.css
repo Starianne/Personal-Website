@@ -103,6 +103,34 @@
     left: 0;
 }
 
+#musicImg {
+    border: #37a5ff solid 5px;
+    border-radius: 1000px;
+    background-color: #363636;
+    margin-left: 1vw;
+    margin-bottom: 2vh;
+}
+
+#musicImg img {
+    max-height: 15vh;
+    animation: rotate 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.music.play #musicImg img {
+    animation-play-state: running;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 
 h1 {
     color: rgb(0, 0, 0);
