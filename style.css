@@ -209,3 +209,73 @@ video {
     margin-right: 2vw;
     max-width: 35vw;
 }
+
+/** Project styles **/
+
+#project {
+    background-color: #303030;
+    height: 100%;
+    width: 100%;
+}
+
+#projectSelectScreen {
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    position: relative;
+}
+
+#projectSelectHeader {
+    position: absolute;
+    top: 0;
+    width: 99vw;
+    height: 10vh;
+    background-color: #a8a8a8;
+    margin-top: -1vh;
+}
+
+#projectSelectHeader h1 { /* fix position later */
+    margin-left: 1vw;
+}
+
+#projectSelectHeader .goHome {
+    margin-right: 5vw;
+    margin-top: -11vh; /*Crazy dodgy hardcoded stuff rn but its just to help start fix later */
+}
+
+#projectSelectionContainer {
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    position: relative;
+}
+
+#leftBtn{
+    height: 10vh;
+    width: 5vw;
+    background-color: aqua;
+    position: absolute;
+    left: 0;
+}
+
+#rightBtn{
+    height: 10vh;
+    width: 5vw;
+    background-color: rgb(234, 0, 255);
+    position: absolute;
+    right: 0;
+}
+
+
+#projects {
+    display: grid;
+    grid-row: 1;
+    grid-column: span;
+}
+
+.projectImg { /*Probably a mask here? or change actual image size, check when home */
+    border-image: round;
+    border: #000 solid 2px;
+    border-radius: 100000px;
+    width: fit-content;
+}

@@ -1,13 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="project">
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>home</title>
+        <title>projects</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="home.js"></script>
     </head>
-    <body>
-        <h1>My projects:</h1>
+    <body><!--Will defo need js for this, want info screen like portals, then click to enter with same sound effect and open new page-->
+        <div id="projectSelectScreen">
+            <div id="projectSelectHeader">
+                <div id="projectSelectTitle">
+                    <h1>My projects</h1>
+                </div>
+                <div class="goHome" onclick="window.location.href='./index.html'">
+                    Go home
+                </div>
+            </div>
+            <div id="projectSelectContainer">
+                <div id="leftBtn"></div>
+                <div id="projects">
+                    <div id="smartMirror" class="projectImg"><img src="./imgs/placeholder.png" alt="place"></div>
+                    <div id="keyboard" class="projectImg"><img src="./imgs/placeholder.png" alt="place"></div>
+                    <div id="nfcCard" class="projectImg"><img src="./imgs/placeholder.png" alt="place"></div>
+                    <div id="personalWebsite" class="projectImg"><img src="./imgs/placeholder.png" alt="place"></div>
+                    <div id="beatBlade" class="projectImg"><img src="./imgs/placeholder.png" alt="place"></div>
+                    <div id="websiteGuide" class="projectImg"><img src="./imgs/placeholder.png" alt="place"></div>
+                    <div id="musichat" class="projectImg"><img src="./imgs/placeholder.png" alt="place"></div>
+                </div>
+                
+                <div id="rightBtn"></div>
+
+            </div>
+
+        </div>
     </body>
 </html>
