@@ -1,29 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" id="project">
+<html lang="en">
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>projects</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="projects.js"></script>
+        <link rel="stylesheet" type="text/css" href="projectstyle.css">
     </head>
     <body><!--Will defo need js for this, want info screen like portals, then click to enter with same sound effect and open new page-->
-        <div id="projectSelectScreen">
-            <div id="projectSelectHeader">
-                <div id="projectSelectTitle">
-                    <h1>My projects</h1>
-                </div>
-                <div class="goHome" onclick="window.location.href='./index.html'">
-                    Go home
-                </div>
-            </div>
-            <div id="projectSelectContainer">
-                <div id="leftBtn"></div>
-                <canvas id="bg"></canvas>
-                <div id="rightBtn"></div>
-
-            </div>
-
-        </div>
+        <script type="module" src="projects.js" ></script>
+        <canvas id="bg"></canvas>
+        <img id="left" src="./imgs/TROP034.PNG" alt="left button" />
+        <img id="right" src="./imgs/TROP034.PNG" alt="right button" />
     </body>
 </html>

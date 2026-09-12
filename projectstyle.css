@@ -1,0 +1,28 @@
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/*Left and right buttons*/
+#left {
+    position: fixed;
+    left: 0;
+    top: 40vh;
+    z-index: 1;
+}
+
+#left:hover {
+    border: 3px solid peachpuff;
+}
+
+#right {
+    position: fixed;
+    right: 0;
+    top: 40vh;
+    z-index: 1;
+}
+
+#right:hover {
+    border: 3px solid peachpuff
+}
