@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import './projectstyle.css';
 
 const scene = new THREE.Scene();
@@ -12,6 +13,8 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+const loader = new GLTFLoader();
+
 //setting up light 
 const light = new THREE.DirectionalLight(0x717A73, 3)
 light.position.set(-1, 2, 4);
@@ -20,34 +23,56 @@ scene.add(light)
 camera.position.z = 10;
 
 //set up each disc
-function makeInstance(color, x) {
-    const geometry = new THREE.CylinderGeometry(2, 3, 0.5)
-    const material = new THREE.MeshPhongMaterial({color}); //meshphong makes a meterial that is affected by light
-    const disc = new THREE.Mesh(geometry, material);
+async function makeInstance(x) { //can change this to have different files loaded for each disc just add url to replace diskTest.glb
+
+    const gltf = await loader.loadAsync('discTest.glb'); //async basically waiting for geo+mat from blender file to be fetched
+    const disc = gltf.scene; //meshes it together basically
+    console.log(disc.children.length, disc.children)
     scene.add(disc);
-
-    disc.position.x = x*1.5;
-
-    return disc;
+    
+    disc.position.x = x*1.5; //moves position of each disc so they dont stack on eachother
+    
+    return disc; //returns promises (bc of async) so we translate this into objects we can use in init() 
 }
 
+let discs = [];
 
-const discs = [
-    makeInstance(0xE0E0E0, 0),
-    makeInstance(0xE0E0E0, 8),
-    makeInstance(0xE0E0E0, 16),
-    makeInstance(0xE0E0E0, 24),
-    makeInstance(0xE0E0E0, 32)
-];
+async function init() {
+    discs = await Promise.all([
+        makeInstance(0),
+        makeInstance(8),
+        makeInstance(16),
+        makeInstance(24),
+        makeInstance(32)
+    ]);
+    //only start rendering once every disc has actually loaded
+    requestAnimationFrame( render ); //apparently we need two
+}
+
+init(); //now discs = the full array of objects
+
+
+//we need to store data
+
+const discData = [
+    '{"bImg" : "moogle.png", "title" : "project1", "projectDec" : "Project description blablabla", "skills" : "skill1, skill2, skill3", "hours" : "20"}',
+    '{"bImg" : "moogle.png", "title" : "project1", "projectDec" : "Project description blablabla", "skills" : "skill1, skill2, skill3", "hours" : "20"}',
+    '{"bImg" : "moogle.png", "title" : "project1", "projectDec" : "Project description blablabla", "skills" : "skill1, skill2, skill3", "hours" : "20"}',
+    '{"bImg" : "moogle.png", "title" : "project1", "projectDec" : "Project description blablabla", "skills" : "skill1, skill2, skill3", "hours" : "20"}',
+    '{"bImg" : "moogle.png", "title" : "project1", "projectDec" : "Project description blablabla", "skills" : "skill1, skill2, skill3", "hours" : "20"}'
+]
 
 var discPos = 0 //we will use this to track where the disc position is
+
+function update(pos) {
+    
+}
 
 //actually loading the discs
 function render(time) {
     time *= 0.001; //to convert time into seconds
     discs.forEach((disc) => { //goes through each item in the array
-        disc.rotation.y = time / 2;
-        disc.rotation.x = 1.5; 
+        disc.rotation.z = time / 2;
     });
 
     renderer.render( scene, camera );
@@ -62,7 +87,6 @@ const rightBtn = document.getElementById("right")
 function left() {
     if (discPos > 0) {
         camera.position.x -= 12
-        console.log("hello")
         discPos -= 1
         console.log(`${discPos} position`)
     }
@@ -71,7 +95,6 @@ function left() {
 
 function right() {
     if (discPos < 4) {
-        console.log("go right")
         camera.position.x += 12
         discPos += 1
         console.log(`${discPos} position`)
@@ -84,7 +107,7 @@ rightBtn.addEventListener("click", right)
 
 
 
-requestAnimationFrame( render ); //apparently we need two
+
 
 
 
