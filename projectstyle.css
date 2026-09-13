@@ -19,10 +19,12 @@ canvas {
     left: 0;
     top: 40vh;
     z-index: 1;
+    max-height: 30vh;
 }
 
 #left:hover {
-    border: 3px solid peachpuff;
+    border: 3px solid rgb(151, 15, 15);
+    cursor: pointer;
 }
 
 #right {
@@ -30,10 +32,12 @@ canvas {
     right: 0;
     top: 40vh;
     z-index: 1;
+    max-height: 30vh;
 }
 
 #right:hover {
-    border: 3px solid peachpuff
+    border: 3px solid rgb(151, 15, 15);
+    cursor: pointer;
 }
 
 #discInfoDiv {
@@ -66,9 +70,42 @@ canvas {
 }
 
 #heading {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 2vh;
     left: 0;
     z-index: 3;
     max-width: 100vw;
+}
+
+#goHomeBtn {
+    position: fixed;
+    bottom: 5vh;
+    left: 5vw;
+    z-index: 3;
+}
+#goHome {
+    margin-bottom: 15px;
+}
+
+#goHome:hover {
+    cursor: pointer;
+}
+
+#pointer {
+    max-height: 90px;
+    display: none;
+    
+}
+
+#pointer.hovered {
+    display: inline;
+    position: relative;
+    transition: 0.4s;
+    animation: hovering 0.75s infinite;
+}
+
+@keyframes hovering {
+    0%   {top: 0px;}
+    50% {top: 10px;}
+    100% {top: 0px;}
 }

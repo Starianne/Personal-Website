@@ -16,7 +16,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 
-const loader = new GLTFLoader();
+const loader = new GLTFLoader(); //to load blender model
 
 
 //setting up light 
@@ -72,11 +72,23 @@ function onDiscClick(event) {
     const intersects = raycaster.intersectObject(discs[discPos], true) //true = check children too
 
     if (intersects.length > 0) { //if you find more layers (like that of an object like the disc)
+        
         window.location.href = discData[discPos][5]; //change the window to the page corresponding to the disc position
     }
 }
 
 canvas.addEventListener('click', onDiscClick);
+
+function onDiscHover(event) { //does the exact same as click but 2 differences
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(pointer,camera);
+    const intersectsHover = raycaster.intersectObject(discs[discPos], true);
+    canvas.style.cursor = intersectsHover.length > 0 ? 'pointer' : 'default'; //if intersectsHover detects multiple textures beneath it, pointer will be used
+}
+
+canvas.addEventListener('mousemove', onDiscHover) //add event listener everytime mouse is over a disc
+
 
 // for later
 function update(data) {//pass through the discs info
@@ -96,10 +108,10 @@ function update(data) {//pass through the discs info
 
 //we need to store data about disks
 const discData = [
-    ["./imgs/musichat.png", "Musichat", "a chat website where you match with other people based on your top 5 songs.", ["django", "HTML/CSS", "JavaScript", "Websockets"], "20", "./musichat.html"],
-    ["./imgs/blinkyBoard.jpeg", "Blinky Board", "a chat website where you match with other people based on your top 5 songs.", ["django", "HTML/CSS", "JavaScript", "Websockets"], "20", "./blinkyBoard.html"],
-    ["./imgs/personalSite.png", "Personal Site", "a chat website where you match with other people based on your top 5 songs.", ["django", "HTML/CSS", "JavaScript", "Websockets"], "20", "./personalSite.html"],
-    ["./imgs/keyboard.png", "Keyboard", "a chat website where you match with other people based on your top 5 songs.", ["django", "HTML/CSS", "JavaScript", "Websockets"], "20", "./keyboard.html"],
+    ["./imgs/musichat.png", "Musichat", "a chat website where you match with other people based on your top 5 songs.", ["django", "HTML/CSS", "JavaScript", "Websockets"], "20", "https://musicchatapp-production.up.railway.app/goSignIn/?next=/"],
+    ["./imgs/blinkyBoard.jpeg", "Blinky Board", "A printed circuit board that i designed with HackClub's blueprint tutorial", ["hardware"], "5", "https://github.com/Starianne/Blinkyboard"],
+    ["./imgs/personalSite.png", "Personal Site", "a website based off of the FF13 trilogy that act as my personal website", ["JavaScript", "HTML/CSS", "Three.js", "Blender"], "20", "https://github.com/Starianne/Personal-Website"],
+    ["./imgs/keyboard.png", "Keyboard", "I will be making my own keyboard", ["hardware", "idk yet"], "0", "https://github.com/Starianne/keyboard"],
 ]
 
 var discPos = 0; //we will use this to track where the disc position is
@@ -158,5 +170,10 @@ function right() {
 leftBtn.addEventListener("click", left);
 rightBtn.addEventListener("click", right);
 
-//plan is have multiple discs that we move to, and then we move the camera with each button press to the next disc,
-//on each disc, it should have an image be updated in the background and the text too1
+//go home button stuff then add css for hover animations
+const goHome = document.getElementById('goHome');
+const goHomePointer = document.getElementById('pointer');
+
+goHome.addEventListener('mouseenter', () => goHomePointer.classList.add('hovered'));
+goHome.addEventListener('mouseleave', () => goHomePointer.classList.remove('hovered'));
+goHome.addEventListener('click', () => window.location.href='./index.html')
