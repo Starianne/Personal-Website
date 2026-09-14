@@ -29,7 +29,7 @@ camera.position.z = 10;
 //set up each disc
 async function makeInstance(x) { //can change this to have different files loaded for each disc just add url to replace diskTest.glb
 
-    const gltf = await loader.loadAsync('discTest.glb'); //async basically waiting for geo+mat from blender file to be fetched
+    const gltf = await loader.loadAsync('/discTest.glb'); //async basically waiting for geo+mat from blender file to be fetched
     const disc = gltf.scene; //meshes it together basically
     scene.add(disc);
     disc.position.x = x*2.25; //moves position of each disc so they dont stack on eachother
@@ -108,10 +108,10 @@ function update(data) {//pass through the discs info
 
 //we need to store data about disks
 const discData = [
-    ["./imgs/musichat.png", "Musichat", "a chat website where you match with other people based on your top 5 songs.", ["django", "HTML/CSS", "JavaScript", "Websockets"], "20", "https://musicchatapp-production.up.railway.app/goSignIn/?next=/"],
-    ["./imgs/blinkyBoard.jpeg", "Blinky Board", "A printed circuit board that i designed with HackClub's blueprint tutorial", ["hardware"], "5", "https://github.com/Starianne/Blinkyboard"],
-    ["./imgs/personalSite.png", "Personal Site", "a website based off of the FF13 trilogy that act as my personal website", ["JavaScript", "HTML/CSS", "Three.js", "Blender"], "20", "https://github.com/Starianne/Personal-Website"],
-    ["./imgs/keyboard.png", "Keyboard", "I will be making my own keyboard", ["hardware", "idk yet"], "0", "https://github.com/Starianne/keyboard"],
+    ["/imgs/musichat.png", "Musichat", "a chat website where you match with other people based on your top 5 songs.", ["django", "HTML/CSS", "JavaScript", "Websockets"], "20", "https://musicchatapp-production.up.railway.app/goSignIn/?next=/"],
+    ["/imgs/blinkyBoard.jpeg", "Blinky Board", "A printed circuit board that i designed with HackClub's blueprint tutorial", ["hardware"], "5", "https://github.com/Starianne/Blinkyboard"],
+    ["/imgs/personalSite.png", "Personal Site", "a website based off of the FF13 trilogy that act as my personal website", ["JavaScript", "HTML/CSS", "Three.js", "Blender"], "20", "https://github.com/Starianne/Personal-Website"],
+    ["/imgs/keyboard.png", "Keyboard", "I will be making my own keyboard", ["hardware", "idk yet"], "0", "https://github.com/Starianne/keyboard"],
 ]
 
 var discPos = 0; //we will use this to track where the disc position is

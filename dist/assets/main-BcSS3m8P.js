@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-P2Xu9kJm.js";/* empty css              */var e=document.querySelector(`.music`),t=document.querySelector(`#audio`);e.addEventListener(`click`,()=>{e.classList.contains(`play`)?(e.classList.remove(`play`),t.pause()):(e.classList.add(`play`),t.play())});
