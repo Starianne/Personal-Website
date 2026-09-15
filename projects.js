@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import './projectstyle.css';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -15,44 +17,38 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+//to make blender metal texture load properly
+const pmremGenerator = new THREE.PMREMGenerator(renderer);
+scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.4).texture;
+import './projectstyle.css';
 
 const loader = new GLTFLoader(); //to load blender model
-
-
-//setting up light 
-const light = new THREE.DirectionalLight(0xFFFFFF, 3)
-light.position.set(-1, 2, 4);
-scene.add(light)
 
 camera.position.z = 10;
 
 //set up each disc
-async function makeInstance(x) { //can change this to have different files loaded for each disc just add url to replace diskTest.glb
+async function makeInstance(x, discFile) { //can change this to have different files loaded for each disc just add url to replace diskTest.glb
 
-    const gltf = await loader.loadAsync('/discTest.glb'); //async basically waiting for geo+mat from blender file to be fetched
+    const gltf = await loader.loadAsync(discFile); //async basically waiting for geo+mat from blender file to be fetched
     const disc = gltf.scene; //meshes it together basically
     scene.add(disc);
-    disc.position.x = x*2.25; //moves position of each disc so they dont stack on eachother
+    disc.position.x = x*3; //moves position of each disc so they dont stack on eachother
+    disc.position.z = -x;
+    disc.rotation.y = 0.2;
     
     return disc; //returns promises (bc of async) so we translate this into objects we can use in init() 
 }
 
-var title = document.getElementById("title")
-var info = document.getElementById("info")
-var skills = document.getElementById("skills")
-var hours = document.getElementById("hours")
-
-
-
+var imginfo = document.getElementById("info")
 
 let discs = [];
 
 async function init() {
     discs = await Promise.all([
-        makeInstance(0),
-        makeInstance(8),
-        makeInstance(16),
-        makeInstance(24)
+        makeInstance(0, '/discMusichat.glb'),
+        makeInstance(8, '/discBlinky.glb'),
+        makeInstance(16, '/discPersonalWebsite.glb'),
+        makeInstance(24, '/discKeyboard.glb')
     ]);
     console.log(discs)
     //only start rendering once every disc has actually loaded
@@ -72,8 +68,7 @@ function onDiscClick(event) {
     const intersects = raycaster.intersectObject(discs[discPos], true) //true = check children too
 
     if (intersects.length > 0) { //if you find more layers (like that of an object like the disc)
-        
-        window.location.href = discData[discPos][5]; //change the window to the page corresponding to the disc position
+        window.open(discData[discPos][3], '_blank'); //change the window to the page corresponding to the disc position
     }
 }
 
@@ -98,20 +93,19 @@ function update(data) {//pass through the discs info
             {
                 scene.background = texture;
             });
-    title.innerHTML = data[1];
-    info.innerHTML = data[2];
-    skills.innerHTML = data[3];
-    hours.innerHTML = data[4];
+    
+    imginfo.src= data[1]
+    imginfo.alt = data[2]
     discs[discPos]
     
 }
 
 //we need to store data about disks
 const discData = [
-    ["/imgs/musichat.png", "Musichat", "a chat website where you match with other people based on your top 5 songs.", ["django", "HTML/CSS", "JavaScript", "Websockets"], "20", "https://musicchatapp-production.up.railway.app/goSignIn/?next=/"],
-    ["/imgs/blinkyBoard.jpeg", "Blinky Board", "A printed circuit board that i designed with HackClub's blueprint tutorial", ["hardware"], "5", "https://github.com/Starianne/Blinkyboard"],
-    ["/imgs/personalSite.png", "Personal Site", "a website based off of the FF13 trilogy that act as my personal website", ["JavaScript", "HTML/CSS", "Three.js", "Blender"], "20", "https://github.com/Starianne/Personal-Website"],
-    ["/imgs/keyboard.png", "Keyboard", "I will be making my own keyboard", ["hardware", "idk yet"], "0", "https://github.com/Starianne/keyboard"],
+    ["/imgs/musichat.png", "/imgs/musichatInfo.png", "Musichat, a chat website where you match with other people based on your top 5 songs. Skills: django, HTML/CSS, JavaScript, Websockets. Hours spent: 104", "https://musicchatapp-production.up.railway.app/goSignIn/?next=/"],
+    ["/imgs/blinkyBoard.png", "/imgs/blinkyInfo.png", "Blinky Board, A printed circuit board that i designed with HackClub's blueprint tutorial. Skills: hardware. Hours spent: 5", "https://github.com/Starianne/Blinkyboard"],
+    ["/imgs/personalSite.png", "/imgs/personalSiteInfo.png", "This Site! A website based off of the FF13 trilogy that acts as my personal website. Skills: JavaScript, HTML/CSS, Three.js, Blender. Hours spent: 63", "https://github.com/Starianne/Personal-Website"],
+    ["/imgs/keyboard.png", "/imgs/keyboardInfo.png", "I will be making my own keyboard! Skills: hardware, idk yet.", "https://github.com/Starianne/keyboard"],
 ]
 
 var discPos = 0; //we will use this to track where the disc position is
@@ -128,47 +122,37 @@ function render(time) {
 
 }
 
-//left and right buttons
-const leftBtn = document.getElementById("left")
-leftBtn.style.display = "none" //to make sure that page loads in with left button unavailable
-const rightBtn = document.getElementById("right")
 update(discData[0])
 
-function updateBtns() { //make sure buttons get update on disc pos
-    if (discPos == 0) {
-        leftBtn.style.display = "none";
-    } else if (discPos == 3) {
-        rightBtn.style.display = "none";
-    } else {
-        leftBtn.style.display = "block";
-        rightBtn.style.display = "block";
-    }
-}
-
-function left() {
-    if (discPos > 0) {
-        camera.position.x -= 18;
+//Movement w keyboard
+document.addEventListener('keydown', function(event) {
+    var value = event.code;
+    console.log(value)
+    if (value == "KeyA" || value == "ArrowLeft") {
+        if (discPos > 0) {
+        camera.position.x -= 24;
+        camera.position.z += 8;
         discPos -= 1;
         update(discData[discPos]);
         updateBtns();
         console.log(`${discPos} position`);
-    }
-    
-}
+        }
 
-function right() {
-    if (discPos < 3) { //update if you add a new project
-        camera.position.x += 18;
+    } else if (value == "KeyD" || value == "ArrowRight") {
+        if (discPos < 3) { //update if you add a new project
+        camera.position.x += 24;
+        camera.position.z -= 8;
         discPos += 1;
         update(discData[discPos]);
         updateBtns();
         console.log(`${discPos} position`);
+        }
+    } else if (value == "Space") {
+        window.open(discData[discPos][3], '_blank'); //change the window to the page corresponding to the disc position
+    } else if (value == "Backspace") {
+        window.open('./index.html') 
     }
-    
-}
-
-leftBtn.addEventListener("click", left);
-rightBtn.addEventListener("click", right);
+});
 
 //go home button stuff then add css for hover animations
 const goHome = document.getElementById('goHome');
@@ -176,4 +160,4 @@ const goHomePointer = document.getElementById('pointer');
 
 goHome.addEventListener('mouseenter', () => goHomePointer.classList.add('hovered'));
 goHome.addEventListener('mouseleave', () => goHomePointer.classList.remove('hovered'));
-goHome.addEventListener('click', () => window.location.href='./index.html')
+goHome.addEventListener('click', () => window.location.href='./index.html');

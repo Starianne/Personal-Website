@@ -41,32 +41,24 @@ canvas {
 }
 
 #discInfoDiv {
-    z-index: 1;
+    z-index: 3;
     position: fixed;
     color: rgb(253, 253, 253);
-    top: 65vh;
-    left: 60vw;
-}
-
-#mainDiv {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-#title {
-    font-size: xx-large;
+    top: 50vh;
+    right: 10vh;
+    display: grid;
 }
 
 #info {
-    font-size: x-large;
+    max-height: 35vh;
 }
 
-#skills {
-    font-size: large;
-}
-
-#asideDiv {
-    display: flex;
-    align-content: flex-end;
+#keys {
+    max-height: 8vh;
+    position: fixed;
+    bottom: 5vh;
+    right: 10vh;
+    margin-top: 2vh;
 }
 
 #heading {
